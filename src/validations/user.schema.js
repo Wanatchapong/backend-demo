@@ -11,3 +11,8 @@ exports.userLoginSchema = Joi.object({
   username: Joi.string().required(),
   password: Joi.string().required(),
 })
+
+exports.updateUserSchema = Joi.object({
+  firstname: Joi.string().required(),
+  lastname: Joi.string().required(),
+})

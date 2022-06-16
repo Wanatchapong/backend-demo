@@ -3,7 +3,10 @@ const express = require('express')
 const asyncHandler = require('../middlewares/async-handler.middleware')
 const validationHandler = require('../middlewares/validation.middleware')
 const controller = require('../controllers/user.controller')
-const { createUserSchema } = require('../validations/user.schema')
+const {
+  createUserSchema,
+  updateUserSchema,
+} = require('../validations/user.schema')
 
 const router = express.Router()
 
@@ -17,7 +20,11 @@ router.post(
   asyncHandler(controller.createUser),
 )
 
-router.put('/:id', asyncHandler(controller.updateUser))
+router.put(
+  '/:id',
+  validationHandler(updateUserSchema, 'body'),
+  asyncHandler(controller.updateUser),
+)
 
 router.delete('/:id', asyncHandler(controller.deleteUser))
 
